@@ -1,7 +1,7 @@
 # dotnet-affected
 
 A .NET Tool for determining which projects are affected by a set of changes. This tool is particularly useful for large
-projects or mono-repositories.
+projects or mono-repositories
 
 ## Features
 
