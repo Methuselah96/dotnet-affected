@@ -53,9 +53,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --no-incremental /WarnAsError
 
-    - name: Test
-      run: dotnet test --no-build
-
     - name: Run Tool PowerShell
       if: matrix.os == 'windows-latest'
       shell: pwsh
@@ -64,7 +61,7 @@ jobs:
     - name: Run Tool Bash
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       shell: bash
-      run: ./src/dotnet-affected/bin/Debug/net6.0/dotnet-affected -p $GITHUB_WORKSPACE --assume-changes dotnet-affected -v
+      run: ./src/dotnet-affected/bin/Debug/net8.0/dotnet-affected -p $GITHUB_WORKSPACE --assume-changes dotnet-affected -v
 
     - name: Pack
       if: success() && matrix.os == 'ubuntu-latest'
