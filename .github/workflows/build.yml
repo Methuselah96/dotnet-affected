@@ -31,7 +31,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Install .NET
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      if: matrix.os == 'ubuntu-24.04' || matrix.os == 'macos-latest'
       run: |
         ./eng/install-sdk.sh
         echo "DOTNET_ROOT=$GITHUB_WORKSPACE/eng/.dotnet" >> $GITHUB_ENV
@@ -62,24 +62,24 @@ jobs:
       run: ./src/dotnet-affected/bin/Debug/net6.0/dotnet-affected -p $Env:GITHUB_WORKSPACE --assume-changes dotnet-affected -v
 
     - name: Run Tool Bash
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      if: matrix.os == 'ubuntu-24.04' || matrix.os == 'macos-latest'
       shell: bash
       run: ./src/dotnet-affected/bin/Debug/net6.0/dotnet-affected -p $GITHUB_WORKSPACE --assume-changes dotnet-affected -v
 
     - name: Pack
-      if: success() && matrix.os == 'ubuntu-latest'
+      if: success() && matrix.os == 'ubuntu-24.04'
       run: dotnet pack --no-restore --no-build --configuration Debug --include-symbols -p:SymbolPackageFormat=snupkg -o $GITHUB_WORKSPACE/packages
 
     - uses: actions/upload-artifact@v3
       name: 'Upload Packages'
-      if: success() && matrix.os == 'ubuntu-latest'
+      if: success() && matrix.os == 'ubuntu-24.04'
       with:
         name: packages
         path: ${{ github.workspace }}/packages/**/*
 
     - uses: actions/upload-artifact@v3
       name: 'Upload Artifacts'
-      if: success() && matrix.os == 'ubuntu-latest'
+      if: success() && matrix.os == 'ubuntu-24.04'
       with:
         name: artifacts
         path: src/dotnet-affected/bin/Debug/net8.0/
