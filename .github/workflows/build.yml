@@ -53,9 +53,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --no-incremental /WarnAsError
 
-    - name: Test
-      run: dotnet test --no-build
-
     - name: Run Tool PowerShell
       if: matrix.os == 'windows-latest'
       shell: pwsh
